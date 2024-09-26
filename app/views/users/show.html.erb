@@ -1,0 +1,13 @@
+<h1><%= @user.name %></h1>
+<ul>
+  <p>Email: <%= @user.email %> </p>
+  <p>Roles: <% @user.roles.each do |role| %>
+    <li>
+       <%= role.name %>
+     </li>
+   <% end %>
+
+   <br>
+  <%= link_to "Edit", edit_user_path(@user) %>
+  <%= button_to 'Remove', user_path(@user), method: 'delete', data: { confirm: 'Are you sure?' } %>
+</ul>

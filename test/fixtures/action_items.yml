@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  status: 1
+  task: one
+  itemable: one
+  itemable_type: Itemable
+
+two:
+  name: MyString
+  status: 1
+  task: two
+  itemable: two
+  itemable_type: Itemable

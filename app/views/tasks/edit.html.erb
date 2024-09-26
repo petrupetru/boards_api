@@ -1,0 +1,42 @@
+<h2>Edit Task</h2>
+<%= form_with model: [ @board, @task ], url: board_task_path do |form| %>
+    <p>
+      <%= form.label :column %><br>
+      <%= form.select :column_id, @board.columns.map {|c| [c.name, c.id]} %>
+    </p>
+    <!--
+    <p>
+      <%= form.label :type %><br>
+      <%= form.select :type, [['Bug', 'Task::Bug'], ['Feature', 'Task::Feature'], ['Support', 'Task::Support']] %>
+
+
+    </p>
+    -->
+    <p>
+      <%= form.label :title %><br>
+      <%= form.text_area :title %>
+    </p>
+    <p>
+      <%= form.label :description %><br>
+      <%= form.text_area :description %>
+    </p>
+    <p>
+      <%= form.label :due_date %><br>
+      <%= form.date_select :due_date %>
+    </p>
+  
+    <div>
+      <h3>Assign Users:</h3>
+      <%= @users.each do |user| %>
+        <%= check_box_tag "task[user_ids][]", user.id %>
+        <%= label_tag "task_user_ids_#{user.id}", user.name %><br>
+      <% end %>
+    </div>
+    
+    <p>
+      <%= form.submit "Update Task"%>
+    </p>
+
+
+    
+  <% end %>

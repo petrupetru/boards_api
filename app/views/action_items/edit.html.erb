@@ -1,0 +1,27 @@
+<h1>Edit Action Item</h1>
+
+<%= form_with(model: [@board, @task, @action_item], url: board_task_action_item_path(@task.board, @task)) do |form| %>
+    <%= form.label :name %>
+    <%= form.text_field :name %><br>
+
+    <%= form.label :status %>
+    <%= form.select :status, ActionItem.statuses.keys.map { |status| [status.humanize, status] }, {}, { required: true } %><br>
+    
+    
+    <%= form.label :itemable_type, "Type" %>
+    <%= form.select :itemable_type, [["Photo", "Photo"], ["Document", "Document"]], { selected: "Photo" } %><br>
+
+    <%= form.label :content, "Content" %>
+    <%= form.text_field :content %> <br>
+
+    <%= form.label :photo_source, "Photo Source" %>
+    <%= form.text_field :photo_source %>
+
+    <%= form.label :document_link, "Document Link" %>
+    <%= form.text_field :document_link %> <br>
+
+
+    <%= form.submit "Update Action Item"%>
+    <%= button_to 'Remove', board_task_action_item_path(@board, @task, @action_item), method: 'delete', data: { confirm: 'Are you sure?' } %>
+  
+<% end %>

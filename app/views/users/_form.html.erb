@@ -1,0 +1,38 @@
+<%= form_with model: user do |form| %>
+    <div>
+        <%= form.label :name %><br>
+        <%= form.text_field :name %>
+        <% user.errors.full_messages_for(:name).each do |message| %>
+        <div><%= message %></div>
+        <% end %>
+    </div>
+
+    <div>
+        <%= form.label :email %><br>
+        <%= form.text_field :email %>
+        <% user.errors.full_messages_for(:name).each do |message| %>
+        <div><%= message %></div>
+        <% end %>
+    </div>
+
+    <div>
+        <%= form.label :password %><br>
+        <%= form.password_field :password %>
+        <% user.errors.full_messages_for(:name).each do |message| %>
+        <div><%= message %></div>
+        <% end %>
+    </div>
+
+    <div>
+      <h3>Assign Roles:</h3>
+      <%= @roles.each do |role| %>
+        <%= check_box_tag "user[role_ids][]", role.id %>
+        <%= label_tag "role_user_ids_#{user.id}", role.name %><br>
+      <% end %>
+    </div>
+
+
+    <div>
+        <%= form.submit %>
+    </div>
+<% end %>

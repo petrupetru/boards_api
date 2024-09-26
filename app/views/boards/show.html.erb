@@ -1,0 +1,48 @@
+<h1><%= @board.name %></h1>
+<%= render '/columns/columns', columns: @columns, board: @board %>
+
+
+<h2>Add a task:</h2>
+<%= form_with model: [ @board, @board.tasks.build ] do |form| %>
+  <p>
+    <%= form.label :column %><br>
+    <%= form.select :column_id, @columns.map {|c| [c.name, c.id]} %>
+  </p>
+  <p>
+    <%= form.label :type %><br>
+    <%= form.select :type, [['Bug', 'Task::Bug'], ['Feature', 'Task::Feature'], ['Support', 'Task::Support']] %>
+  </p>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_area :title %>
+  </p>
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </p>
+  <p>
+    <%= form.label :due_date %><br>
+    <%= form.date_select :due_date %>
+  </p>
+
+  <div>
+    <h3>Assign Users:</h3>
+    <%= @users.each do |user| %>
+      <%= check_box_tag "task[user_ids][]", user.id %>
+      <%= label_tag "task_user_ids_#{user.id}", user.name %><br>
+    <% end %>
+  </div>
+
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<br>
+<br>
+<br>
+<ul>
+  <li><%= link_to "Edit", edit_board_path(@board) %></li>
+  <%= button_to 'Remove', board_path(@board), method: 'delete', data: { confirm: 'Are you sure?' } %>
+</ul>

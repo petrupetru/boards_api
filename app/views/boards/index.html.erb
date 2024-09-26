@@ -1,0 +1,10 @@
+<h1>Boards</h1>
+<ul>
+  <% @boards.each do |board| %>
+   <li>
+      <%= link_to board.name, board %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "New Board", new_board_path %>

@@ -1,0 +1,81 @@
+<p>
+    <strong>Title:</strong>
+    <%= @task.title %>
+</p>
+
+<p>
+    <strong>Column</strong>
+    <%= @task.column.name %>
+</p>
+
+
+<p>
+    <strong>Type:</strong>
+    <%= @task.type %>
+</p>
+
+<p>
+    <strong>Description:</strong>
+    <%= @task.description %>
+</p>
+<p>
+    <strong>Due date:</strong>
+    <%= @task.due_date %>
+</p>
+<p>
+<br>
+<strong>Users</strong> <% @task.users.each do |user| %>
+    <%= user.name %>
+<% end %>
+</p>
+<br>
+<p>
+<h4>Actions</h4> <% @task.action_items.each do |action_item| %>
+    <strong>Name:</strong> <%= action_item.name %> 
+    <strong>Status:</strong> <%= action_item.status %> 
+    <% if action_item.itemable_type == "Photo" %>
+        <strong>Photo:</strong> <%= action_item.itemable.content %> (Source: <%= action_item.itemable.photo_source %>)
+    <% elsif action_item.itemable_type == "Document" %>
+        <strong> Document: </strong> <%= action_item.itemable.content %> (Link: <%= action_item.itemable.document_link %>)
+    <% end %>
+    <%= link_to "Edit ", edit_board_task_action_item_path(@task.board, @task, action_item) %>
+
+
+
+    <br>
+
+<% end %>
+</p>
+
+<%= form_with(model: [@task, @task.action_items.build], url: board_task_action_items_path(@task.board, @task)) do |form| %>
+    <%= form.label :name %>
+    <%= form.text_field :name %><br>
+
+    <%= form.label :status %>
+    <%= form.select :status, ActionItem.statuses.keys.map { |status| [status.humanize, status] }, { required: true } %><br>
+    
+    
+    <%= form.label :itemable_type, "Type" %>
+    <%= form.select :itemable_type, [["Photo", "Photo"], ["Document", "Document"]], { selected: "Photo" } %><br>
+
+    <%= form.label :content, "Content" %>
+    <%= form.text_field :content %> <br>
+
+    <%= form.label :photo_source, "Photo Source" %>
+    <%= form.text_field :photo_source %>
+
+    <%= form.label :document_link, "Document Link" %>
+    <%= form.text_field :document_link %> <br>
+
+
+    <%= form.submit "Create Action Item"%>
+  
+<% end %>
+
+
+<br><br>
+
+<ul>
+  <li><%= link_to "Edit", edit_board_task_path(@task.board, @task) %></li>
+  <%= button_to 'Remove', board_task_path(@task.board, @task), method: 'delete', data: { confirm: 'Are you sure?' } %>
+</ul>

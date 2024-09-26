@@ -1,0 +1,16 @@
+<table cellpadding="30">
+  <tr>
+    <% @columns.each do |column| %>
+      <td>
+          <h2>
+            <%= column.name %>
+          </h2>
+          <% column.tasks.each do |task| %>
+              <li><%= link_to task.title, board_task_path(@board, task) %></li>
+              
+          <% end %>
+      </td>
+
+    <% end %>
+  </tr>
+</table>

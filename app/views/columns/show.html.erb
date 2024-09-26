@@ -1,0 +1,11 @@
+
+
+
+
+
+
+<ul>
+  <li><%= link_to "Edit Column", edit_column_path(@column) %></li>
+  <%= button_to 'Remove Column', column_path(@column), method: 'delete', data: { confirm: 'Are you sure?' } %>
+</ul>
+
