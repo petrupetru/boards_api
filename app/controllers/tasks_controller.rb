@@ -2,11 +2,13 @@ class TasksController < ApplicationController
     def index
       @board = Board.find(params[:board_id])
       @tasks = @board.tasks
+      authorize Task, policy_class: TaskPolicy
     end
 
     def show
       @board = Board.find(params[:board_id])
       @task = @board.tasks.find(params[:id])
+      authorize @task, policy_class: TaskPolicy
       @action_item = ActionItem.new
 
       
@@ -15,32 +17,36 @@ class TasksController < ApplicationController
     def new
       @task = Task.new
       @users = User.all 
+      authorize @task, policy_class: TaskPolicy
     end
 
 
     def create
         @board = Board.find(params[:board_id])
         @task = @board.tasks.new(task_params)
+        authorize @task, policy_class: TaskPolicy
         @users = User.all
         if @task.save
-            @task.user_ids = params[:task][:user_ids] || []
-            redirect_to @board
-          else
-            Rails.logger.error(@task.errors.full_messages.join(", "))
-            redirect_to @board
-          end
+          @task.user_ids = params[:task][:user_ids] || []
+          redirect_to @board
+        else
+          Rails.logger.error(@task.errors.full_messages.join(", "))
+          redirect_to @board
+        end
     end
 
     def edit
       @users = User.all
       @board = Board.find(params[:board_id])
       @task = Task.find(params[:id])
+      authorize @task, policy_class: TaskPolicy
     end
   
     def update
       @users = User.all
       @board = Board.find(params[:board_id])
       @task = Task.find(params[:id])
+      authorize @task, policy_class: TaskPolicy
       if @task.class.name == "Task::Bug"
         if @task.update(task_bug_params)
           #puts "######################"
@@ -74,10 +80,13 @@ class TasksController < ApplicationController
     def destroy
       @board = Board.find(params[:board_id])
       @task = @board.tasks.find(params[:id])
+      authorize @task, policy_class: TaskPolicy
       @task.destroy
   
       redirect_to board_path(@board), status: :see_other
     end
+
+
   
     
     private

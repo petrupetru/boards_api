@@ -22,6 +22,5 @@
 
 
     <%= form.submit "Update Action Item"%>
-    <%= button_to 'Remove', board_task_action_item_path(@board, @task, @action_item), method: 'delete', data: { confirm: 'Are you sure?' } %>
-  
 <% end %>
+    <%= button_to 'Remove', board_task_action_item_path(@board, @task, @action_item), method: 'delete', data: { confirm: 'Are you sure?' } %>

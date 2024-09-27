@@ -1,19 +1,18 @@
-class BoardPolicy  < ApplicationPolicy
-    attr_reader :user, :board
+class ActionItemPolicy  < ApplicationPolicy
+    attr_reader :user, :action_item
 
-    def initialize(user, board)
+    def initialize(user, action_item)
         @user = user
-        @board = board
+        @action_item = action_item
     end
 
     def index?
-    false
+        check_view(user)
     end
 
     def show?
         check_view(user)
     end
-    
 
     def create?
         check_edit(user)

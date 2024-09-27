@@ -7,6 +7,7 @@ class BoardsController < ApplicationController
   def show
     @users = User.all
     @board = Board.find(params[:id])
+    authorize @board
     @columns = @board.columns
     @task = Task.new
   end

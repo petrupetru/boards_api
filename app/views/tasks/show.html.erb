@@ -30,7 +30,7 @@
 </p>
 <br>
 <p>
-<h4>Actions</h4> <% @task.action_items.each do |action_item| %>
+<h4>Checklist</h4> <% @task.action_items.each do |action_item| %>
     <strong>Name:</strong> <%= action_item.name %> 
     <strong>Status:</strong> <%= action_item.status %> 
     <% if action_item.itemable_type == "Photo" %>

@@ -1,19 +1,18 @@
-class BoardPolicy  < ApplicationPolicy
-    attr_reader :user, :board
+class TaskPolicy  < ApplicationPolicy
+    attr_reader :user, :task
 
-    def initialize(user, board)
+    def initialize(user, task)
         @user = user
-        @board = board
+        @task = task
     end
 
     def index?
-    false
+        check_view(user)
     end
 
     def show?
         check_view(user)
     end
-    
 
     def create?
         check_edit(user)

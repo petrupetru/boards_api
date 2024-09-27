@@ -42,6 +42,14 @@ class ApplicationPolicy
       user.roles.exists?(name: "admin")
   end
 
+  def check_edit(user)
+    user.roles.exists?(name: ["editor", "admin"])
+  end
+
+  def check_view(user)
+    user.roles.exists?(name: ["editor", "admin", "viewer"])
+  end
+
   class Scope
     def initialize(user, scope)
       @user = user

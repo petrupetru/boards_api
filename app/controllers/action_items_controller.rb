@@ -3,6 +3,7 @@ class ActionItemsController < ApplicationController
         @board = Board.find(params[:board_id])
         @task = Task.find(params[:task_id])
         @action_item = ActionItem.new
+        authorize @action_item
     end
 
     def create
@@ -11,6 +12,7 @@ class ActionItemsController < ApplicationController
         @task = Task.find(params[:task_id])
 
         @action_item = @task.action_items.new(action_item_params)
+        authorize @action_item
         if action_item_params[:itemable_type] == 'Photo'
           photo = Photo.new(photo_params)
           @action_item.itemable = photo
@@ -32,6 +34,7 @@ class ActionItemsController < ApplicationController
       @board = Board.find(params[:board_id])
       @task = Task.find(params[:task_id])
       @action_item = @task.action_items.find(params[:id])
+      authorize @action_item
     end
 
     def update
@@ -39,7 +42,7 @@ class ActionItemsController < ApplicationController
       @board = Board.find(params[:board_id])
       @task = Task.find(params[:task_id])
       @action_item = @task.action_items.find(params[:id])
-
+      authorize @action_item
 
       if @action_item.itemable_type == 'Photo'
         if @action_item.itemable.update(photo_params)
@@ -65,6 +68,7 @@ class ActionItemsController < ApplicationController
       @board = Board.find(params[:board_id])
       @task = @board.tasks.find(params[:task_id])
       @action_item = @task.action_items.find(params[:id])
+      authorize @action_item
       @action_item.destroy
       redirect_to board_task_path(@board, @task)
 
