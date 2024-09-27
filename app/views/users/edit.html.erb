@@ -1,2 +1,23 @@
-<h1>Edit User</h1>
-<%= render "form", user: @user %>
+<h2>Edit User <%= @user.email.to_s.humanize %></h2>
+
+<%= form_with model: @user do |f| %>
+  <%= render "devise/shared/error_messages", resource: @user %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= Role.all.each do |role| %>
+      <%= check_box_tag "user[role_ids][]", role.id %>
+      <%= label_tag "role_user_ids", role.name %><br>
+    <% end %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+

@@ -2,6 +2,8 @@ class BoardsController < ApplicationController
   before_action :authenticate_user!
   def index
     @boards = Board.all
+    @users = User.where.not(:id => current_user.id)
+
   end
 
   def show

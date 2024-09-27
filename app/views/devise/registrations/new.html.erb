@@ -8,12 +8,7 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
-  <div class="field">
-    <%= Role.all.each do |role| %>
-      <%= check_box_tag "user[role_ids][]", role.id %>
-      <%= label_tag "role_user_ids", role.name %><br>
-    <% end %>
-  </div>
+
 
   <div class="field">
     <%= f.label :password %>

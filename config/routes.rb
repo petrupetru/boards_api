@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions' }
+  resources :users, except: :create
+
+  # Name it however you want
+  post 'create_user' => 'users#create', as: :create_user
+
+
   root 'boards#index'
 
   resources :boards do
