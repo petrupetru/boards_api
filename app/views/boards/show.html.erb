@@ -29,7 +29,7 @@
     <h3>Assign Users:</h3>
     <%= @users.each do |user| %>
       <%= check_box_tag "task[user_ids][]", user.id %>
-      <%= label_tag "task_user_ids_#{user.id}", user.name %><br>
+      <%= label_tag "task_user_ids_#{user.id}", user.email %><br>
     <% end %>
   </div>
 

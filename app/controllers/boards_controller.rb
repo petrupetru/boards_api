@@ -1,4 +1,5 @@
 class BoardsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @boards = Board.all
   end
@@ -12,10 +13,12 @@ class BoardsController < ApplicationController
 
   def new
     @board = Board.new
+    authorize @board
   end
 
   def create
     @board = Board.new(board_params)
+    authorize @board
     if @board.save
       create_default_columns(@board)
       redirect_to @board
@@ -26,10 +29,12 @@ class BoardsController < ApplicationController
 
   def edit
     @board = Board.find(params[:id])
+    authorize @board
   end
 
   def update
     @board = Board.find(params[:id])
+    authorize @board
     if @board.update(board_params)
       redirect_to @board
     else
@@ -39,6 +44,7 @@ class BoardsController < ApplicationController
 
   def destroy
     @board = Board.find(params[:id])
+    authorize @board
     @board.destroy
 
     redirect_to root_path, status: :see_other

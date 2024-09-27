@@ -1,3 +1,6 @@
+<br><br>
+
+<%= button_to "logout", destroy_user_session_path, method: :delete  %>
 <h1>Boards</h1>
 <ul>
   <% @boards.each do |board| %>
