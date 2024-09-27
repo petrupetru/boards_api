@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
+    acts_as_paranoid
     has_and_belongs_to_many :users
     belongs_to :column
     belongs_to :board

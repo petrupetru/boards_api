@@ -1,4 +1,5 @@
 class ActionItem < ApplicationRecord
+  acts_as_paranoid
   belongs_to :task
   belongs_to :itemable, polymorphic: true
 
