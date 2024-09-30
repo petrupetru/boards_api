@@ -47,6 +47,8 @@
 <% end %>
 </p>
 
+<% if current_user.roles.exists?(name: ["admin", "editor"]) %>
+<h4> Add Checklist Item </h4>
 <%= form_with(model: [@task, @task.action_items.build], url: board_task_action_items_path(@task.board, @task)) do |form| %>
     <%= form.label :name %>
     <%= form.text_field :name %><br>
@@ -79,3 +81,5 @@
   <li><%= link_to "Edit", edit_board_task_path(@task.board, @task) %></li>
   <%= button_to 'Remove', board_task_path(@task.board, @task), method: 'delete', data: { confirm: 'Are you sure?' } %>
 </ul>
+
+<% end %>

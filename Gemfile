@@ -59,5 +59,6 @@ gem "devise", "~> 4.9"
 
 gem "pundit", "~> 2.4"
 
-
 gem "paranoia", "~> 3.0"
+
+gem 'bullet', group: 'development'

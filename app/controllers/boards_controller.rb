@@ -10,7 +10,7 @@ class BoardsController < ApplicationController
     @users = User.all
     @board = Board.find(params[:id])
     authorize @board
-    @columns = @board.columns
+    @columns = @board.columns.includes([:tasks])
     @task = Task.new
   end
 
