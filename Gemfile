@@ -67,3 +67,6 @@ gem 'paper_trail'
 
 gem 'ougai'
 gem 'amazing_print'
+
+gem 'sidekiq'
+gem "sidekiq-cron"

@@ -8,5 +8,7 @@ class Task < ApplicationRecord
     has_many :action_items, dependent: :destroy
     
     validates :type, presence: true
+
+    enum status: { active: 0, completed: 1, archived: 2 }
     
 end

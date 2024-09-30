@@ -12,6 +12,8 @@ class TasksController < ApplicationController
       @action_item = ActionItem.new
 
       
+      
+      
     end
 
     def new
