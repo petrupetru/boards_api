@@ -64,3 +64,6 @@ gem "paranoia", "~> 3.0"
 gem 'bullet', group: 'development'
 
 gem 'paper_trail'
+
+gem 'ougai'
+gem 'amazing_print'

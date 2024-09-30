@@ -1,5 +1,10 @@
 class BoardsController < ApplicationController
+  include LoggerModule
+
   before_action :authenticate_user!
+
+
+
   def index
     if params.has_key?(:include_columns) and params.has_key?(:include_tasks)
       if params[:include_columns] == "true" and params[:include_tasks] == "false"
@@ -25,6 +30,8 @@ class BoardsController < ApplicationController
     authorize @board
     @columns = @board.columns.includes([:tasks])
     @task = Task.new
+
+    LoggerModule.logger.error("################INFO############")
   end
 
   def new

@@ -62,7 +62,9 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    amazing_print (1.6.0)
     bcrypt (3.1.20)
+    bigdecimal (3.1.8)
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
@@ -146,7 +148,13 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
+    oj (3.16.6)
+      bigdecimal (>= 3.0)
+      ostruct (>= 0.2)
     orm_adapter (0.5.0)
+    ostruct (0.6.0)
+    ougai (2.0.0)
+      oj (~> 3.10)
     paper_trail (15.2.0)
       activerecord (>= 6.1)
       request_store (~> 1.4)
@@ -283,6 +291,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  amazing_print
   bootsnap (>= 1.4.4)
   bullet
   byebug
@@ -290,6 +299,7 @@ DEPENDENCIES
   devise (~> 4.9)
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  ougai
   paper_trail
   paranoia (~> 3.0)
   puma (~> 5.0)
