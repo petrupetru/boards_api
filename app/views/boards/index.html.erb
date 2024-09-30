@@ -25,3 +25,21 @@
 <%= link_to "New User", new_user_path %>
 
 <% end %>
+
+
+
+<br><br><br>
+
+<% if params.has_key?(:include_columns) and params.has_key?(:include_tasks)  %>
+    <% @boards.each do |board| %>
+      <% if params[:include_columns] == "true" and params[:include_tasks] == "true" %>
+        <%= board.to_json(include: [:columns, :tasks]) %> <br><br>
+      <% elsif params[:include_columns] == "true" and params[:include_tasks] == "false" %>
+        <%= board.to_json(include: [:columns]) %> <br><br>
+      <% elsif params[:include_columns] == "false" and params[:include_tasks] == "true" %>
+        <%= board.to_json(include: [:tasks]) %> <br><br>
+      <% else %>
+        <%= board.to_json %> <br><br>
+      <% end %>
+    <% end %>
+<% end %>

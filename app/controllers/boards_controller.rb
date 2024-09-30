@@ -1,7 +1,20 @@
 class BoardsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @boards = Board.all
+    if params.has_key?(:include_columns) and params.has_key?(:include_tasks)
+      if params[:include_columns] == "true" and params[:include_tasks] == "false"
+        @boards = Board.includes(:columns).all
+      elsif params[:include_columns] == "true" and params[:include_tasks] == "true"
+        @boards = Board.includes(:columns, :tasks).all
+      elsif params[:include_columns] == "false" and params[:include_tasks] == "true"
+        @boards = Board.includes(:tasks).all
+      else 
+        @boards = Board.all
+      end
+    else
+      @boards = Board.all
+    end
+    
     @users = User.where.not(:id => current_user.id)
 
   end
@@ -53,9 +66,10 @@ class BoardsController < ApplicationController
     redirect_to root_path, status: :see_other
   end
 
+
   private
     def board_params
-      params.require(:board).permit(:name)
+      params.require(:board).permit(:name, :include_columns, :include_tasks)
     end
 
     def create_default_columns(board)
