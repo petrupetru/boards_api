@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_27_122435) do
+ActiveRecord::Schema.define(version: 2024_09_30_073259) do
 
   create_table "action_items", force: :cascade do |t|
     t.string "name"
@@ -109,6 +109,17 @@ ActiveRecord::Schema.define(version: 2024_09_27_122435) do
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.string "whodunnit"
+    t.datetime "created_at", precision: 6
+    t.bigint "item_id", null: false
+    t.string "item_type", null: false
+    t.string "event", null: false
+    t.text "object", limit: 1073741823
+    t.text "object_changes", limit: 1073741823
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
   add_foreign_key "action_items", "tasks"

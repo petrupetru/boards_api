@@ -7,18 +7,22 @@
     <%= form.label :status %>
     <%= form.select :status, ActionItem.statuses.keys.map { |status| [status.humanize, status] }, {}, { required: true } %><br>
     
-    
+    <% if false %>
     <%= form.label :itemable_type, "Type" %>
     <%= form.select :itemable_type, [["Photo", "Photo"], ["Document", "Document"]], { selected: "Photo" } %><br>
+    <% end %>
+
 
     <%= form.label :content, "Content" %>
     <%= form.text_field :content %> <br>
 
-    <%= form.label :photo_source, "Photo Source" %>
-    <%= form.text_field :photo_source %>
-
-    <%= form.label :document_link, "Document Link" %>
-    <%= form.text_field :document_link %> <br>
+    <% if @action_item.itemable_type == "Photo" %>
+        <%= form.label :photo_source, "Photo Source" %>
+        <%= form.text_field :photo_source %>
+    <% else %>
+        <%= form.label :document_link, "Document Link" %>
+        <%= form.text_field :document_link %> <br>
+    <% end %>
 
 
     <%= form.submit "Update Action Item"%>

@@ -4,6 +4,8 @@ class User < ApplicationRecord
   acts_as_paranoid
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_paper_trail
   has_and_belongs_to_many :tasks
   has_and_belongs_to_many :roles
 end

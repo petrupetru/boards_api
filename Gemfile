@@ -62,3 +62,5 @@ gem "pundit", "~> 2.4"
 gem "paranoia", "~> 3.0"
 
 gem 'bullet', group: 'development'
+
+gem 'paper_trail'
