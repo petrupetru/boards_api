@@ -34,7 +34,7 @@ RSpec.describe ActionItem, type: :model do
     expect(a).not_to be_persisted
   end
 
-  it "should fail with status not in enum" do
+  it "should raise ArgumentError with status not in enum" do
     expect { t.action_items.create(
         name: "Test1",
         status: 6,

@@ -22,8 +22,6 @@ class BoardsController < ApplicationController
     
     @users = User.where.not(:id => current_user.id)
 
-    ArchiveTaskJob.perform_async
-
   end
 
   def show
