@@ -8,4 +8,8 @@ class User < ApplicationRecord
   has_paper_trail
   has_and_belongs_to_many :tasks
   has_and_belongs_to_many :roles
+
+  validates :email, presence: true
+  validates :email, uniqueness: true
+  validates :encrypted_password, presence: true
 end

@@ -59,9 +59,11 @@ gem "devise", "~> 4.9"
 
 gem "pundit", "~> 2.4"
 
-gem "paranoia", "~> 3.0"
+gem "paranoia"
 
-gem 'bullet', group: 'development'
+group :development, :test do
+  gem 'bullet'
+end
 
 gem 'paper_trail'
 
@@ -70,3 +72,8 @@ gem 'amazing_print'
 
 gem 'sidekiq'
 gem "sidekiq-cron"
+
+group :development, :test do
+  gem 'rspec-rails', '~> 6.1.0'
+end
+

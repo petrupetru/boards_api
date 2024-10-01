@@ -1,4 +1,4 @@
-class Paranoia < ActiveRecord::Migration[6.1]
+class ParanoiaBoard < ActiveRecord::Migration[6.1]
   def change
     add_column :boards, :deleted_at, :datetime
     add_index :boards, :deleted_at
