@@ -31,7 +31,7 @@ class BoardsController < ApplicationController
     @columns = @board.columns.includes([:tasks])
     @task = Task.new
 
-    LoggerModule.logger.error("################INFO############")
+    LoggerModule.logger.error("################ERROR############")
   end
 
   def new
