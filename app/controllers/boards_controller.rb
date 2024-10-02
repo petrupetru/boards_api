@@ -6,6 +6,13 @@ class BoardsController < ApplicationController
 
 
   def index
+    #tasks_to_ar = TaskTracker.new.call
+    #puts "############################"
+    #puts tasks_to_ar.map{|task| task.title}
+    #puts "############################"
+
+    #TaskArchiver.new.call
+
     if params.has_key?(:include_columns) and params.has_key?(:include_tasks)
       if params[:include_columns] == "true" and params[:include_tasks] == "false"
         @boards = Board.includes(:columns).all
