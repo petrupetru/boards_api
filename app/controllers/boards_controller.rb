@@ -48,9 +48,9 @@ class BoardsController < ApplicationController
 
   def create
     @board = Board.new(board_params)
-    authorize @board
-    if @board.save
-      create_default_columns(@board)
+    if @board.valid?
+      authorize @board
+      Boards::Creator.new.call(@board)
       redirect_to @board
     else
       render :new, status: :unprocessable_entity
@@ -65,7 +65,8 @@ class BoardsController < ApplicationController
   def update
     @board = Board.find(params[:id])
     authorize @board
-    if @board.update(board_params)
+
+    if Boards::Updater.new.call(@board, board_params)
       redirect_to @board
     else
       render :edit, status: :unprocessable_entity
@@ -75,8 +76,7 @@ class BoardsController < ApplicationController
   def destroy
     @board = Board.find(params[:id])
     authorize @board
-    @board.destroy
-
+    Boards::Destroyer.new.call(@board)
     redirect_to root_path, status: :see_other
   end
 
@@ -86,11 +86,5 @@ class BoardsController < ApplicationController
       params.require(:board).permit(:name, :include_columns, :include_tasks)
     end
 
-    def create_default_columns(board)
-      default_columns = ['icebox', 'pending', 'in-progress', 'finished', 'delivered']
-      default_columns.each do |column_name|
-        board.columns.create(name: column_name)
-      end
-    end
 
 end
