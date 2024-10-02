@@ -32,20 +32,42 @@ RSpec.describe "Boards", type: :request do
   end
 
   describe "GET /new" do
-    it "renders a successful response" do
-      user.roles << role
-      sign_in(user)
-      get new_board_path
-      expect(response).to be_successful
+    context "with permisions" do
+      it "renders a successful response" do
+        user.roles << role
+        sign_in(user)
+        get new_board_path
+        expect(response).to be_successful
+      end
+    end 
+
+    context "without permissions" do 
+      it "raises permission error" do 
+        sign_in(user)
+        expect {
+          get new_board_path
+        }.to raise_error(Pundit::NotAuthorizedError)
+      end
     end
+
   end
 
   describe "GET /edit" do
-    it "renders a successful response" do
-      user.roles << role
-      sign_in(user)
-      get edit_board_path(board)
-      expect(response).to be_successful
+    context "with permisions" do
+      it "renders a successful response" do
+        user.roles << role
+        sign_in(user)
+        get edit_board_path(board)
+        expect(response).to be_successful
+      end
+    end
+    context "without permissions" do 
+      it "raises permission error" do 
+        sign_in(user)
+        expect {
+          get edit_board_path(board)
+        }.to raise_error(Pundit::NotAuthorizedError)
+      end
     end
   end
 

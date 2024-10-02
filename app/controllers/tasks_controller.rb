@@ -53,7 +53,11 @@ class TasksController < ApplicationController
         if @task.update(task_bug_params)
           #puts "######################"
           #puts params
-          @task.user_ids = params[:task][:user_ids] || []
+          if params[:task].present?
+            @task.user_ids = params[:task][:user_ids] || []
+          else 
+            @task.user_ids = []
+          end
           redirect_to board_task_path(@board, @task)
         else
           redirect_to @board, status: :unprocessable_entity
@@ -61,7 +65,11 @@ class TasksController < ApplicationController
       end
       if @task.class.name == "Task::Feature"
         if @task.update(task_feature_params)
-          @task.user_ids = params[:task][:user_ids] || []
+          if params[:task].present?
+            @task.user_ids = params[:task][:user_ids] || []
+          else 
+            @task.user_ids = []
+          end
           redirect_to board_task_path(@board, @task)
         else
           redirect_to @board, status: :unprocessable_entity
@@ -69,7 +77,11 @@ class TasksController < ApplicationController
       end
       if @task.class.name == "Task::Support"
         if @task.update(task_support_params)
-          @task.user_ids = params[:task][:user_ids] || []
+          if params[:task].present? 
+            @task.user_ids = params[:task][:user_ids] || []
+          else 
+            @task.user_ids = []
+          end
           redirect_to board_task_path(@board, @task)
         else
           redirect_to @board, status: :unprocessable_entity
