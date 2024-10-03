@@ -1,5 +1,4 @@
 <br><br>
-<% presenter = BoardPresenter.new(current_user) %>
 <%= button_to "logout", destroy_user_session_path, method: :delete  %>
 <h1>Boards</h1>
 <ul>
@@ -9,10 +8,10 @@
     </li>
   <% end %>
 </ul>
-<% if presenter.edit_role? %>
+<% if current_user.roles.exists?(name: ["admin", "editor"]) %>
 <%= link_to "New Board", new_board_path %>
 <% end %>
-<% if presenter.edit_role? %>
+<% if current_user.roles.exists?(name: ["admin"]) %>
 <h1>Users</h1>
 <ul>
   <% @users.each do |user| %>
