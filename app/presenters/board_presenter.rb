@@ -7,5 +7,7 @@ class BoardPresenter
         @current_user.roles.exists?(name: ["admin", "editor"])
     end
   
-    # Add other presentation methods as needed
+    # def as_json ... 
+
+
   end

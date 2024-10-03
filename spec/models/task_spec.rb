@@ -50,6 +50,39 @@ RSpec.describe Task, type: :model do
     expect(us[1].tasks.count).to eq(1)
   end
 
+  context "scopes" do
+    it "should get all tasks archived more that n days ago" do
+      Boards::Creator.new.create_default_columns(b)
+
+      column_delivered_id = b.columns.find_by_name('delivered').id
+      column_icebox_id = b.columns.find_by_name('icebox').id
+
+      task1 = b.tasks.create(title: "BUG_RSPEC", type: "Task::Bug", description: "test", column_id: column_delivered_id)
+      task2 = b.tasks.create(title: "Feature_RSPEC", type: "Task::Feature", description: "test", column_id: column_icebox_id)
+      task3 = b.tasks.create(title: "Support_RSPEC", type: "Task::Support", description: "test", column_id: column_delivered_id)
+
+      task1.update(status: 2, archived_at: 5.days.ago)
+      task2.update(status: 2, archived_at: 1.days.ago)
+      expect(Task.archived_days_ago(3)).to eq([task1])
+    end
+    it "should get all active tasks from delivered column" do
+      Boards::Creator.new.create_default_columns(b)
+  
+      column_delivered_id = b.columns.find_by_name('delivered').id
+      column_icebox_id = b.columns.find_by_name('icebox').id
+  
+  
+      task1 = b.tasks.create(title: "BUG_RSPEC", type: "Task::Bug", description: "test", column_id: column_delivered_id, status: 0)
+      task2 = b.tasks.create(title: "Feature_RSPEC", type: "Task::Feature", description: "test", column_id: column_icebox_id, status: 0)
+      task3 = b.tasks.create(title: "Support_RSPEC", type: "Task::Support", description: "test", column_id: column_delivered_id, status: 0)
+  
+      task1.update(status: 2, archived_at: 5.days.ago)
+      task2.update(status: 2, archived_at: 1.days.ago)
+      expect(Task.active_delivered).to eq([task3])
+    end
+   
+  end
+
 
 
 

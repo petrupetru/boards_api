@@ -12,4 +12,11 @@ class Task < ApplicationRecord
 
     enum status: { active: 0, completed: 1, archived: 2 }
     
+
+    #scope pe task pentru toate taskurile arhivate de peste 3 zile
+    scope :archived_days_ago, -> (days){ where(status: :archived).where('archived_at < ?', days.day.ago) }
+
+    #scope pentru toate taskurile active din coloana delivered
+    scope :active_delivered, -> { joins(:column).where(status: :active, 'columns.name' => "delivered") }
+
 end

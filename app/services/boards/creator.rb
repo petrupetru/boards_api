@@ -4,8 +4,6 @@ class Boards::Creator
         create_default_columns(board)
     end
 
-    private
-
     def create_default_columns(board)
         default_columns = ['icebox', 'pending', 'in-progress', 'finished', 'delivered']
         default_columns.each do |column_name|
