@@ -74,7 +74,7 @@ gem 'sidekiq'
 gem "sidekiq-cron"
 
 group :development, :test do
-  gem 'rspec-rails', '~> 6.1.0'
+  gem 'rspec-rails'
 end
 
 gem 'rails-controller-testing'

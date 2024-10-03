@@ -366,7 +366,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.7, >= 6.1.7.8)
   rails-controller-testing
-  rspec-rails (~> 6.1.0)
+  rspec-rails
   rswag
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)

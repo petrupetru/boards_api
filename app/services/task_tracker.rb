@@ -5,7 +5,7 @@ class TaskTracker
     def call
         tasks_to_archive_all = []
         Board.all.each { |board|
-            tasks_to_archive_board = @task_finder_service.call(board).where.not(status: :archived)
+            tasks_to_archive_board = @task_finder_service.call(board)
             tasks_to_archive_all += tasks_to_archive_board
         }
         tasks_to_archive_all
