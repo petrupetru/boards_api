@@ -1,5 +1,5 @@
 <br><br>
-<% presenter = BoardPresenter.new(@boards, current_user) %>
+<% presenter = BoardPresenter.new(current_user) %>
 <%= button_to "logout", destroy_user_session_path, method: :delete  %>
 <h1>Boards</h1>
 <ul>

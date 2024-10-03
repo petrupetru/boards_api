@@ -1,6 +1,5 @@
 class BoardPresenter
-    def initialize(boards = nil, current_user = nil)
-      @boars = boards
+    def initialize(current_user = nil)
       @current_user = current_user
     end
   

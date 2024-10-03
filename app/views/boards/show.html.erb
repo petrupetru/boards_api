@@ -1,7 +1,9 @@
+<% presenter = BoardPresenter.new(current_user) %>
+
 <h1><%= @board.name %></h1>
 <%= render '/columns/columns', columns: @columns, board: @board %>
 
-<% if current_user.roles.exists?(name: ["admin", "editor"]) %>
+<% if presenter.edit_role? %>
 <h2>Add a task:</h2>
 <%= form_with model: [ @board, @board.tasks.build ] do |form| %>
   <p>
