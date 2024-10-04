@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :set_paper_trail_whodunnit
     def index
       @board = Board.find(params[:board_id])
       @tasks = @board.tasks

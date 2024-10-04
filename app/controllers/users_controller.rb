@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    before_action :set_paper_trail_whodunnit
+
     def index
         @users = User.where.not(:id => current_user.id)
 

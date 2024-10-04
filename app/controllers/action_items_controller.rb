@@ -1,4 +1,6 @@
 class ActionItemsController < ApplicationController
+  before_action :set_paper_trail_whodunnit
+
     def new
         @board = Board.find(params[:board_id])
         @task = Task.find(params[:task_id])

@@ -1,5 +1,6 @@
 class ColumnsController < ApplicationController
     before_action :set_board
+    before_action :set_paper_trail_whodunnit
 
     def index
         @columns = Column.all
